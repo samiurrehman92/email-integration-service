@@ -165,6 +165,12 @@ npm run dev:debug
 npm run test:debug
 ```
 
+### Deploy
+* We have deployed this solution on AWS Lambda using AWS serverless.
+* Before doing any deployment, please ensure your have aws cli downloaded and isntalled. Read more here: `https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html`
+* Please ensure you have appropriate access (or root access) account in AWS.
+* Run `npm run serverless:deploy` in root folder to deploy the solution as a lambda and view the console to see the deployed URL.
+
 ---
 # Future Enhancements
 * We can use a database to store every request sent to the service and its result (my preference: MongoDB). This will also allow us to remember `successRatio` and `lastActiveServiceName` even if service goes down.

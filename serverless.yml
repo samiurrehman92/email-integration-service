@@ -1,0 +1,27 @@
+# serverless.yml 
+service: serverless-nodejs-app 
+provider: 
+  name: aws 
+  runtime: nodejs12.x
+  stage: dev 
+  region: eu-central-1 
+functions: 
+  mail-integration: 
+    handler: dist/server.handler # reference the file and exported method
+    events:
+      - http:
+          path: / # this matches the base path
+          method: ANY
+      - http:
+          path: /api-explorer/
+          method: GET
+      - http:
+          path: /v1/mails
+          method: POST
+plugins:
+  - serverless-offline # Get your serverless configuration and run the server local
+package:
+  exclude:
+    - '*'
+  include:
+    - /dist/**

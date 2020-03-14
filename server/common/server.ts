@@ -45,4 +45,15 @@ export default class ExpressServer {
 
     return app;
   }
+
+  serverless(): Application {
+    installValidator(app, this.routes).then(() => {
+      http.createServer(app);
+    }).catch(e => {
+      l.error(e);
+      exit(1)
+    });
+
+    return app;
+  }
 }

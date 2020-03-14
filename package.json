@@ -9,7 +9,9 @@
     "dev": "nodemon server/index.ts | pino-pretty",
     "dev:debug": "nodemon --exec 'node -r ts-node/register --inspect-brk' server/index.ts | pino-pretty",
     "test": "mocha test/**/*.ts --exit",
-    "test:debug": "mocha --inspect-brk test/**/*.ts --exit"
+    "test:debug": "mocha --inspect-brk test/**/*.ts --exit",
+    "serverless:offline": "npm run compile && serverless offline start",
+    "serverless:deploy": "npm run compile && serverless deploy"
   },
   "repository": {
     "type": "git",
@@ -38,7 +40,8 @@
     "express-validator": "^6.4.0",
     "http-status-codes": "^1.4.0",
     "node-fetch": "^2.6.0",
-    "pino": "^5.17.0"
+    "pino": "^5.17.0",
+    "serverless-http": "^2.3.2"
   },
   "devDependencies": {
     "@types/chai": "^4.2.9",
@@ -56,6 +59,7 @@
     "pino-pretty": "^3.6.0",
     "prettier": "^1.19.1",
     "shelljs": "^0.8.3",
+    "serverless-offline": "^5.12.1",
     "supertest": "^4.0.2",
     "ts-lint": "^4.5.1",
     "ts-node": "^8.6.2",
