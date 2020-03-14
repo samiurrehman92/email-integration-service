@@ -3,6 +3,7 @@ import { Mail, MailStatus } from '../controllers/mails/model';
 
 import { AbstractMailClient } from '../controllers/mails/mail-client.abstract';
 import { SendGridMailClient } from '../email-clients/send-grid-mail-client';
+import { MailGunMailClient } from '../email-clients/mail-gun-mail-client';
 
 export class MailService {
   mailClients: Array<AbstractMailClient>;
@@ -10,7 +11,8 @@ export class MailService {
 
   constructor() {
     this.mailClients = [
-      new SendGridMailClient(),      
+      new MailGunMailClient(),
+      new SendGridMailClient(),
     ];
   }
 

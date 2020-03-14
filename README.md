@@ -25,6 +25,19 @@ SendGrid integration requires two environment variables to be able to run. These
 * This is a required Env Variable.
 * This is the authentication string that can be retrieved after signing up for SendGrid API.
 
+## 2. [MailGun](https://documentation.mailgun.com/en/latest/api-sending.html)
+MailGun integration requires two environment variables to be able to run. These include:
+#### 1. MAIL_GUN_ENDPOINT
+* This is a required Env Variable.
+* This is the endpoint of MailGun Service and can be normally set to "https://api.mailgun.net" by default (according to their API).
+#### 2. MAIL_GUN_AUTH
+* This is a required Env Variable.
+* This is the authentication string that can be retrieved after signing up for MailGun API.
+#### 3. MAIL_GUN_SANDBOX
+* This is a required Env Variable.
+* This is the sandbox domain retrieved after signing up for MailGun API.
+
+>Note: MailGun currently does not allow sending emails to any other email account other than the user who signed up. This can be improved in future.
 ---
 
 ## How to add a new mail client
