@@ -1,0 +1,26 @@
+{
+  "name": "email-integration-service",
+  "version": "1.0.0",
+  "description": "RESTful API for sending emails using multiple email clients",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samiurrehman92/email-integration-service.git"
+  },
+  "keywords": [
+    "email",
+    "integration",
+    "nodejs",
+    "express",
+    "typescript"
+  ],
+  "author": "Sami Ur Rehman",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/samiurrehman92/email-integration-service/issues"
+  },
+  "homepage": "https://github.com/samiurrehman92/email-integration-service#readme"
+}
