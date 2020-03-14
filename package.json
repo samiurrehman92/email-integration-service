@@ -36,6 +36,7 @@
     "express-openapi-validator": "^3.9.2",
     "express-validator": "^6.4.0",
     "http-status-codes": "^1.4.0",
+    "node-fetch": "^2.6.0",
     "pino": "^5.17.0"
   },
   "devDependencies": {

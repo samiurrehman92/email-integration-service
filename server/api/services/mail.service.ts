@@ -2,16 +2,19 @@ import L from '../../common/logger'
 import { Mail, MailStatus } from '../controllers/mails/model';
 
 import { AbstractMailClient } from '../controllers/mails/mail-client.abstract';
+import { SendGridMailClient } from '../email-clients/send-grid-mail-client';
 
 export class MailService {
   mailClients: Array<AbstractMailClient>;
   lastActiveClientName: string;
 
   constructor() {
-    this.mailClients = [];
+    this.mailClients = [
+      new SendGridMailClient(),      
+    ];
   }
 
-  async sendMail(mail: Mail): Promise<{ status: MailStatus, description: any }> {
+  async sendMail(mail: Mail): Promise<{ status: string, description: any }> {
     L.info('Email request recieved', mail);
 
     let clientResults: any[] = [];
@@ -55,7 +58,7 @@ export class MailService {
     }
 
     return Promise.resolve({
-      status: finalStatus,
+      status: Mail.STATUS[finalStatus],
       description: clientResults
     });
   }

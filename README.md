@@ -3,7 +3,7 @@
 ## Motivation
 This mail-integration service is as a RESTful HTTP API that can perform the duty as an integration service to send emails. It can be an abstraction over an unlimited number of Email Clients that **can** be used to send emails. This provides resiliance in case one email client goes down. Currently, only two email clients are supported.
 
-## API Documentation (Swagger) [Available Here](https://github.com/samiurrehman92/email-integration-service/blob/master/docs/api.yml)
+## API Documentation (Swagger) [Available Here](https://github.com/samiurrehman92/email-integration-service/blob/master/server/common/api.yml)
 
 ---
 ## Salient Featuers
@@ -13,8 +13,42 @@ This mail-integration service is as a RESTful HTTP API that can perform the duty
 * **Timeout**: By default, request to each service will timeout in 1s. However, this can be overriden in client definition.
 > NOTE: Failover & Intelligence is only im-memory so if service is restarted, this it will not remember either.
 
+---
+# Supported Mailing Clients
 
+## 1. [SendGrid](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html)
+SendGrid integration requires two environment variables to be able to run. These include:
+#### 1. SEND_GRID_ENDPOINT
+* This is a required Env Variable.
+* This is the endpoint of SendGrid Service and can be normally set to "https://api.sendgrid.com" by default (according to their API).
+#### 2. SEND_GRID_AUTH
+* This is a required Env Variable.
+* This is the authentication string that can be retrieved after signing up for SendGrid API.
 
+---
+
+## How to add a new mail client
+1. Create a new file in `server/api/email-clients` with the name of your client.
+2. Add any Env variables needed by your service to `.env` and `.env_SAMPLE` file.
+3. Start with the following skeleton code and insert your own code where indicated: 
+```
+import { Mail, MailStatus } from "../../api/controllers/mails/model";
+import { AbstractMailClient } from "../controllers/mails/mail-client.abstract";
+
+const REQ_ENV_VARS: string[] = [<<INSERT_HERE>>]; // Add Env Variables needed by your service to run.
+
+export class YourEmailClient extends AbstractMailClient {
+
+    constructor() {
+        super('<<INSERT_HERE>>', REQ_ENV_VARS); // Name your service
+    }
+
+    async sendMail(mail: Mail): Promise<{ status: string, description: any }> {
+        <<INSERT_HERE>> // implement service logic here and return MailStatus that applies
+    };
+}
+```
+---
 
 ## Quick Start
 
