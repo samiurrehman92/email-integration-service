@@ -170,3 +170,11 @@ npm run test:debug
 * We can use a database to store every request sent to the service and its result (my preference: MongoDB). This will also allow us to remember `successRatio` and `lastActiveServiceName` even if service goes down.
 * We can use an SQS behind this service (and use SQS in the service to poll for data) to allow scalability and prevent loss of data when service is down.
 * In case all clients in the service are failing to process the email request, we could trigger an alarm to inform the admin (in addition to sending error response) (my preference: SNS).
+* Error handling could be improved further with more time, some additional cases that can be treated:
+1. Request Body Size Validation.
+2. Improve the error handling recieved from clients.
+* Improve test coverage. Currently, only some tests are written to demostrate ability to write test.
+* Improve the size of the build (node_modules) etc.
+* Add support for MailGun to send email to any email address (currently it doesn't allow this for free accounts).
+* Have diff .ENV vars for dev, production, test and other environments.
+* I have used .ENV file also for variables that could be extracted into a config file due to lack of time.
