@@ -169,7 +169,13 @@ npm run test:debug
 * We have deployed this solution on AWS Lambda using AWS serverless.
 * Before doing any deployment, please ensure your have aws cli downloaded and isntalled. Read more here: `https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html`
 * Please ensure you have appropriate access (or root access) account in AWS.
+* Please ensure you set up a different `.env.prod` file for production environment seperately.
 * Run `npm run serverless:deploy` in root folder to deploy the solution as a lambda and view the console to see the deployed URL.
+* Latest version of the service is deployed at the following URL: `https://ruxsug82hg.execute-api.eu-central-1.amazonaws.com/dev/` and following endpoints are available:
+GET - `https://ruxsug82hg.execute-api.eu-central-1.amazonaws.com/dev/` (just a welcome page)
+GET - `https://ruxsug82hg.execute-api.eu-central-1.amazonaws.com/dev/api-explorer/index.html` (api docs ui)
+GET - `https://ruxsug82hg.execute-api.eu-central-1.amazonaws.com/dev/v1/spec` (api docs swagger)
+POST - `https://ruxsug82hg.execute-api.eu-central-1.amazonaws.com/dev/v1/mails` (endpoint to send emails)
 
 ---
 # Future Enhancements
@@ -182,5 +188,4 @@ npm run test:debug
 * Improve test coverage. Currently, only some tests are written to demostrate ability to write test.
 * Improve the size of the build (node_modules) etc.
 * Add support for MailGun to send email to any email address (currently it doesn't allow this for free accounts).
-* Have diff .ENV vars for dev, production, test and other environments.
 * I have used .ENV file also for variables that could be extracted into a config file due to lack of time.

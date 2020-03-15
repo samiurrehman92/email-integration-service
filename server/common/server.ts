@@ -31,10 +31,7 @@ export default class ExpressServer {
 
   listen(port: number): Application {
     const welcome = (p: number) => () =>
-      l.info(
-        `up and running in ${process.env.NODE_ENV ||
-          'development'} @: ${os.hostname()} on port: ${p}}`
-      );
+      l.info(`up and running in ${process.env.NODE_ENV || 'development'} @: ${os.hostname()} on port: ${p}}`);
 
     installValidator(app, this.routes).then(() => {
       http.createServer(app).listen(port, welcome(port));

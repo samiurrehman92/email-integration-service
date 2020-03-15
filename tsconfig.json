@@ -1,5 +1,4 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -7,8 +6,18 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types"]
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ]
+    }
   },
-  "include": ["typings.d.ts", "server/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "typings.d.ts",
+    "server/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

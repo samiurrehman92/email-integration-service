@@ -15,8 +15,11 @@ export default function (app: Application, routes: (app: Application) => void): 
   })
     .install(app)
     .then(() => {
-      app.use(process.env.OPENAPI_SPEC || '/spec', express.static(apiSpec));
+      app.use('/v1/spec', express.static(apiSpec));
       routes(app);
       app.use(errorHandler);
+    })
+    .catch((err) => {
+      console.error(err);
     });
 };

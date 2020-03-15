@@ -5,6 +5,7 @@
 
 import { Mail, MailStatus } from "../../api/controllers/mails/model";
 import { AbstractMailClient } from "../controllers/mails/mail-client.abstract";
+import l from '../../common/logger';
 
 import fetch from 'node-fetch';
 import FormData from 'form-data';
@@ -26,7 +27,7 @@ export class MailGunMailClient extends AbstractMailClient {
             mail.status = Mail.STATUS.Queued;
             responseMessage = response;
         } catch (err) {
-            console.error('MailGun Error:', err);
+            l.error('MailGun Error:', err);
             responseMessage = err.message;
             mail.status = Mail.STATUS.NotProcessed;
         }
@@ -52,8 +53,8 @@ export class MailGunMailClient extends AbstractMailClient {
                 formData.append('bcc', mail.bcc.map(mail => `${mail.name} <${mail.email}>`).join(', '));
             }
 
-            console.debug('Sending request to Sendgrind:', this.sendEmailRoute);
-            console.debug('Request payload', JSON.stringify(formData));
+            l.debug('Sending request to MailGun:', this.sendEmailRoute);
+            l.debug('Request payload', JSON.stringify(formData));
 
             fetch(this.sendEmailRoute, {
                 method: 'post',
@@ -68,7 +69,7 @@ export class MailGunMailClient extends AbstractMailClient {
     }
 
     private handleResponse(res: any) {
-        console.debug('Recieved response from MailGun', res.status);
+        l.debug('Recieved response from MailGun', res.status);
 
         switch (res.status) {
             case 200:
@@ -82,7 +83,7 @@ export class MailGunMailClient extends AbstractMailClient {
                         throw Error(`${res.statusText} - ${JSON.stringify(err['message'])}`);
                     })
             default:
-                console.error('MailGun returned an unexpected service response', res);
+                l.error('MailGun returned an unexpected service response', res);
         }
 
     }

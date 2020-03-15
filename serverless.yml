@@ -11,9 +11,12 @@ functions:
     events:
       - http:
           path: / # this matches the base path
-          method: ANY
+          method: GET
       - http:
-          path: /api-explorer/
+          path: /api-explorer/{proxy+} # this renders swagger-ui
+          method: GET
+      - http:
+          path: /v1/spec # this renders openapi sec
           method: GET
       - http:
           path: /v1/mails
@@ -23,5 +26,8 @@ plugins:
 package:
   exclude:
     - '*'
+    - node_modules/**
+    - server/**
+    - test/**
   include:
     - /dist/**
