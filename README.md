@@ -69,6 +69,11 @@ export class YourEmailClient extends AbstractMailClient {
 Get started developing...
 
 ```shell
+# create an .env file locally and enter respective keys necessary for each integration
+cp .env_SAMPLE .env
+```
+
+```shell
 # install deps
 npm install
 
@@ -97,12 +102,6 @@ Runs the application is development mode. Should not be used in production
 npm run dev
 ```
 
-or debug it
-
-```shell
-npm run dev:debug
-```
-
 #### Run in *production* mode:
 
 Compiles the application and starts it in production production mode.
@@ -118,12 +117,6 @@ Run the Mocha unit tests
 
 ```shell
 npm test
-```
-
-or debug them
-
-```shell
-npm run test:debug
 ```
 
 ## Try It
@@ -151,21 +144,6 @@ curl --location --request POST 'localhost:3000/v1/mails' \
 }'
 ```
 
-
-## Debug It
-
-#### Debug the server:
-
-```
-npm run dev:debug
-```
-
-#### Debug Tests
-
-```
-npm run test:debug
-```
-
 ### Deploy
 * We have deployed this solution on AWS Lambda using AWS serverless.
 * Before doing any deployment, please ensure your have aws cli downloaded and isntalled. Read more here: `https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html`
@@ -189,6 +167,7 @@ npm run test:debug
 * Error handling could be improved further with more time, some additional cases that can be treated:
 1. Request Body Size Validation.
 2. Improve the error handling recieved from clients.
+3. Create different .env config for tests.
 * Improve test coverage and quality. Currently, only some tests are written to demostrate ability to write test.
 * Improve the size of the build (node_modules) etc.
 * Add support for MailGun to send email to any email address (currently it doesn't allow this for free accounts).
