@@ -11,6 +11,7 @@ export default function (app: Application, routes: (app: Application) => void): 
   );
   return new OpenApiValidator({
     apiSpec,
+    validateRequests : false,
     validateResponses,
   })
     .install(app)

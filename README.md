@@ -11,6 +11,7 @@ This mail-integration service is as a RESTful HTTP API that can perform the duty
 * **Intelligent**: In the event the call to the last active email client was not succesful anymore, when deciding about which email clients to try next, the service will pick the email client that has been most succesful in previous attempts to send email. This is achieved by keeping the `successRatio` of every client in-memory.
 * **Maintainability**: It is really easy to add more email clients. Please see the **Contribute** section below.
 * **Timeout**: By default, request to each service will timeout in 1s. However, this can be overriden in client definition.
+* **Customization**: By default, all available & active clients will be used to try and send the email. However, for whatever reason, should a user wish to choose which services they want to exclusively use for some email, they can do that by the `service_names` body parameter. See the API spec for details about this.
 > NOTE: Failover & Intelligence is only im-memory so if service is restarted, this it will not remember either.
 
 ---

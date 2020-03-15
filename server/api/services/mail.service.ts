@@ -16,13 +16,13 @@ export class MailService {
     ];
   }
 
-  async sendMail(mail: Mail): Promise<{ status: string, description: any }> {
+  async sendMail(mail: Mail, serviceNames?: string[]): Promise<{ status: string, description: any }> {
     L.info('Email request recieved', mail);
 
     let clientResults: any[] = [];
     let finalStatus: MailStatus;
 
-    const smartClients = this.mailClients
+    let smartClients = this.mailClients
       .filter(client => client.available)
       .sort((a, b) => { // sort the last active client first, then based on successRatio
         if (a.name == this.lastActiveClientName) {
@@ -33,6 +33,10 @@ export class MailService {
           a.successRatio - b.successRatio;
         }
       });
+    
+    if (serviceNames && serviceNames.length) {
+      smartClients = smartClients.filter(client => serviceNames.includes(client.name));
+    }
 
     L.info('Clients to be used', smartClients);
     if (!smartClients.length) {

@@ -4,6 +4,7 @@ import * as HttpStatus from 'http-status-codes';
 
 // eslint-disable-next-line no-unused-vars, no-shadow
 export default function errorHandler(err, req: Request, res: Response, next?: NextFunction) {
+  console.error(err);
   const errors = err.errors || [{ message: err.message }];
   return res
     .status(err.status || 500)

@@ -98,7 +98,17 @@ export const mailSchemaValidation: ValidationSchema = {
         }
     },
     'from.email': emailAddressSchema,
-    'from.name': emailNameSchema
+    'from.name': emailNameSchema,
+    'service_names': {
+        optional: true,
+        isIn: {
+            options: [[
+                'MailGun',
+                'SendGrid'
+            ]],
+            errorMessage: `Invalid service name, it should be one of following: [MailGun,SendGrid]`
+        },
+    }
 };
 
 ['to', 'cc', 'bcc'].forEach(field => {

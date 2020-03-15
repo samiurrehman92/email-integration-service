@@ -24,7 +24,7 @@ export class Controller {
 
     // we will perform the actual logic in the service
     try {
-      const response = await MailService.sendMail(new Mail(req.body));
+      const response = await MailService.sendMail(new Mail(req.body), req.body.service_names);
       return res
         .status(HttpStatus.OK)
         .json({
@@ -34,23 +34,28 @@ export class Controller {
 
     } catch (error) {
 
+      console.error(error);
       l.error(error);
-      let errorMessage = 'Uknown exception';
+      let customError = {
+        status : HttpStatus.INTERNAL_SERVER_ERROR, 
+        message : 'Uknown exception'
+      };
 
       // this logic can be improved by custom error classes
       switch (error.message){
         case 'NO_EMAIL_CONFIGURED':
-          errorMessage = 'No Email Client has been configured.';
+          customError.status = HttpStatus.BAD_REQUEST;
+          customError.message = 'No Email Client has been configured.';
           break;
         default:
       }
           
 
       return res
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .status(customError.status)
         .json({
-          status: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR),
-          error: { message:  errorMessage}
+          status: HttpStatus.getStatusText(customError.status),
+          error: { message:  customError.message}
         });
     }
 
